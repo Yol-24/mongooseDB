@@ -41,27 +41,72 @@ $(document).ready(function () {
     })
 
     $("#btnAdd").click(function () {
-        // e.preventDefault();
-        var formData = {
-            name: $("#name").val(),
-            quan: $("#quantity").val(),
-            prio: $("#priority").val()
-        }
+        var validName = $('#name').val();
+        var validNumber = $('#quantity').val()
+        var validPrio = $('#priority').val()
+        var valid = true;
+        $('.form-control').each(function () {
 
-        $.ajax({
-            url: "/item/create",
-            data: formData,
-            success: function (result) {
-                retrieveItems();
-                $("#getResultDiv").html("<strong>Success!</strong>");
-                $('input').val("")
-            },
-            error: function (e) {
-                $("#getResultDiv").html("<strong>Error</strong>");
-                console.log("ERROR: ", e);
+         
+            if (!$("#name").val()) {
+                valid = false;
+                Swal.fire({
+                    type: 'error',
+                    title: 'Name should be filled!!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            } else if (!$("#quantity").val()) {
+                valid = false;
+                Swal.fire({
+                    type: 'error',
+                    title: 'Quantity should be filled!!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            } else if (!$("#priority").val()) {
+                valid = false;
+                Swal.fire({
+                    type: 'error',
+                    title: 'Priority should be filled!!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+
+
             }
-        });
+        })
+        if (valid) {
+            var formData = {
+                name: $("#name").val(),
+                quan: $("#quantity").val(),
+                prio: $("#priority").val()
+            }
+
+            $.ajax({
+                url: "/item/create",
+                data: formData,
+                success: function (result) {
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Add Success!',
+                        text: 'Student has been enrolled!!!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    addRow(formData)
+                    $("#getResultDiv").html("<strong>Success!</strong>");
+                    $('input').val("")
+                },
+                error: function (e) {
+                    $("#getResultDiv").html("<strong>Error</strong>");
+                    console.log("ERROR: ", e);
+                }
+            });
+
+        }
     })
+
 
     $("#btnSearch").click(function (e) {
         var id = $('.id_search').val()
@@ -86,4 +131,27 @@ $(document).ready(function () {
             }
         });
     })
+
+    $(document).on("click", ".update", function () {
+        var id = $(this).attr('id').split('_')
+        $('#btnUpdated').click(function () {
+            var formData = {
+                name: $("#name").val(),
+                quan: $("#quantity").val(),
+                prio: $("#priority").val()
+            }
+            $.ajax({
+                url: "/item/update/" + id[1],
+                data: formData,
+                success: function (result) {
+                    retrieveItems();
+                    console.log('Success!!')
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                }
+            });
+        })
+    })
+
 })

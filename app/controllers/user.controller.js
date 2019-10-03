@@ -18,11 +18,6 @@ exports.save = (req, res) => {
                 message: err.message
             });
         });
-    // user.save(function (err, cont) {
-    //     if (err) return console.error(err);
-    //     console.log(cont.name + " saved to  collection.");
-    // });
-
 };
 
 // Fetch all Users
@@ -45,4 +40,21 @@ exports.findAll = (res, search) => {
             }
         });
     }
+    // exports.update = (req, res) => {
+    //     const user = new User({
+    //         name: req.name,
+    //         quan: req.quan,
+    //         prio: req.prio
+    //     });
+    //     console.log(user)
+    //     // Save a Customer in the MongoDB
+    //     User.findByIdAndRemove({ _id: req.params.id }, (err, doc) => {
+    //         if (!err) {
+    //             console.log('deleted..')
+    //         } else {
+    //             console.log('Success')
+    //         }
+    //     });
+    //     user.save()
+    // }
 };

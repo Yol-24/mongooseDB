@@ -36,6 +36,10 @@ module.exports = function (app) {
 		users.delete(req,res)
 	});
 
+	app.get('/item/update/:id', (req, res) => {
+		users.save(req,res);		
+		users.delete(req,res)
+	});
 
 	app.get("*", (req, res) => {
 		res.sendFile(path + "404.html");

@@ -50,7 +50,7 @@
 
 		#First {
 			margin-top: 200px;
-			margin-left: 100px;
+			margin-left:508px;
 		}
 
 		h1 {
@@ -137,33 +137,37 @@
 		</div>
 	</center>
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Update Item</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<span>Item</span><input type="text" class="form-control" id="updateName"
-								placeholder="Enter Item Name">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="updateQuan" placeholder="Enter Item Quantity">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="updatePrio" placeholder="Enter Item Priority">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Update Item</button>
+	<div id="modal">
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Update Item</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<span>Item</span><input type="text" class="form-control" id="updateName"
+									placeholder="Enter Item Name">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="updateQuan"
+									placeholder="Enter Item Quantity">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="updatePrio"
+									placeholder="Enter Item Priority">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="btnUpdated">Update Item</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -186,5 +190,5 @@
 
 	})
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </html>
