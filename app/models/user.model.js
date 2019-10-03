@@ -6,4 +6,4 @@ const UserSchema = mongoose.Schema({
     prio:Number
 });
  
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('items', UserSchema);
