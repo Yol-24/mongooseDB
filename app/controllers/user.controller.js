@@ -1,19 +1,17 @@
-const User = require('../models/user.model.js');
+const shop = require('../models/shop.js');
+var mongoose = require('mongoose');
+
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
-    // Create a Customer
-    const user = new User({
-        name: req.name,
-        quan: req.quan,
-        prio: req.prio
-    });
-    console.log(user)
-    // Save a Customer in the MongoDB
-    user.save()
+    var Shop = mongoose.model('Shop', shop.shoppingSchema, 'shops');
+    const shops = new Shop(req);
+    shops.save()
         .then(data => {
+            console.log(data)
             res.send(data);
         }).catch(err => {
+            console.log(err)
             res.status(500).send({
                 message: err.message
             });
@@ -21,40 +19,48 @@ exports.save = (req, res) => {
 };
 
 // Fetch all Users
-exports.findAll = (res, search) => {
+exports.findAll = (res) => {
     var res = res;
-    User.find(search, function (err, items) {
+    shop.find({}, function (err, items) {
         if (err) {
             res.json(err);
         } else {
             res.json({ results: items });
+            // res.end("all")
         }
     });
 
-    exports.delete = (req, res) => {
-        User.findByIdAndRemove({ _id: req.params.id }, (err, doc) => {
-            if (!err) {
-                console.log('deleted..')
-            } else {
-                console.log('Success')
-            }
-        });
-    }
-    // exports.update = (req, res) => {
-    //     const user = new User({
-    //         name: req.name,
-    //         quan: req.quan,
-    //         prio: req.prio
-    //     });
-    //     console.log(user)
-    //     // Save a Customer in the MongoDB
-    //     User.findByIdAndRemove({ _id: req.params.id }, (err, doc) => {
-    //         if (!err) {
-    //             console.log('deleted..')
-    //         } else {
-    //             console.log('Success')
-    //         }
-    //     });
-    //     user.save()
-    // }
 };
+
+exports.delete = (id, res) => {
+    shop.findByIdAndRemove(id, (err, doc) => {
+        if (err) {
+            res.end(""+doc)
+        } else {
+            res.end(""+doc)
+            console.log('deleted')
+        }
+    });   
+}
+
+exports.update = (id,newData, res) => {
+    shop.findByIdAndUpdate(id, newData,(err, doc) => {
+        if (err) {
+            res.end("0")
+        } else {
+            res.json(doc)
+            console.log(doc)
+        }
+    });
+}
+
+exports.findId = (res, id) => {
+    shop.findById(id, (err, doc) => {
+        console.log(doc)
+        if (err) {
+            res.end(doc);
+        } else {
+            res.json({ results: doc });
+        }
+    });
+}
